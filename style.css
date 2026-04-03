@@ -1,0 +1,279 @@
+/* --- CONFIGURAÇÕES GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    overflow: hidden; /* Trava o scroll pra não bugar a animação */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- HEADER (MENU SUPERIOR) --- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 30px 8%; /* Respiro lateral igual ao do conteúdo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Sempre no topo */
+}
+
+header .logo {
+    font-family: "League Gothic", sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+header nav ul {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+header nav ul li {
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+header nav ul li:hover {
+    opacity: 1;
+    color: #beff1b;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-image: radial-gradient(#7f3d9e, #6d00d9);
+    position: relative;
+    overflow: hidden;
+    --calculation: 1; /* Controlado pelo JS (1 ou -1) */
+}
+
+/* Linha horizontal decorativa */
+.container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    top: 60%;
+    z-index: 1;
+}
+
+/* --- LISTA DE ITENS (CARROS) --- */
+.list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%; /* O RESPIRO QUE VOCÊ PEDIU NO CANTO */
+    
+    /* Estado Escondido (Preparado para a transição) */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(calc(100vw * var(--calculation)));
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    z-index: 0;
+}
+
+/* Estado Ativo (O carro que aparece) */
+.item.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    z-index: 10;
+}
+
+/* --- IMAGEM DO CARRO --- */
+.car-img {
+    width: 60%;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+}
+
+.car-img img {
+    width: 100%;
+    max-width: 800px;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+    transition: transform 0.6s ease;
+    transform: rotate(-5deg); /* Leve inclinação inicial */
+}
+
+/* Animação de Hover no Carro */
+.item.active:hover .car-img img {
+    transform: scale(1.05) rotate(-2deg);
+    filter: drop-shadow(0 0 30px rgba(190, 255, 27, 0.4));
+}
+
+/* --- CONTEÚDO TEXTUAL --- */
+.content {
+    width: 35%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    z-index: 20;
+}
+
+.content .car-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #beff1b;
+}
+
+.content h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem); /* Ajusta o tamanho conforme a tela */
+    line-height: 0.8em;
+    margin-bottom: 10px;
+}
+
+.content .description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 400px;
+    opacity: 0.8;
+}
+
+.btn-more {
+    margin-top: 20px;
+    padding: 12px 35px;
+    background: transparent;
+    border: 1px solid #beff1b;
+    color: #beff1b;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-more:hover {
+    background: #beff1b;
+    color: #000;
+}
+
+/* --- SETAS DE NAVEGAÇÃO --- */
+.arrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3%; /* Setas um pouco mais para dentro */
+    z-index: 1000;
+    pointer-events: none; /* Não bloqueia o clique no resto da página */
+}
+
+.arrows button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    pointer-events: auto; /* Libera o clique no botão */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.arrows button:hover {
+    background: #beff1b;
+    border-color: #beff1b;
+}
+
+/* Ícone da Seta (Chevron) */
+.arrows button::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    display: block;
+}
+
+.arrows button:hover::after {
+    border-color: #000;
+}
+
+#prev::after { transform: rotate(-135deg); margin-left: 6px; }
+#next::after { transform: rotate(45deg); margin-right: 6px; }
+
+/* --- INDICADORES (NÚMERO E PONTOS) --- */
+.indicators {
+    position: absolute;
+    bottom: 40px;
+    right: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 50;
+}
+
+.indicators .number {
+    font-family: "League Gothic", sans-serif;
+    font-size: 6rem;
+    line-height: 1em;
+    color: #fff;
+}
+
+.indicators ul {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    list-style: none; /* MANO, ISSO AQUI TIRA OS PONTINHOS BRANCOS CHATOS */
+    padding: 0;
+    margin-left: 0;
+}
+
+.indicators ul li {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3); /* Cor dele inativo */
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+/* Quando o ponto está ativo, ele vira a "pílula" verde */
+.indicators ul li.active {
+    background: #beff1b;
+    width: 35px; 
+    border-radius: 10px;
+}
+
+/* Tira qualquer efeito de 'bolinha' padrão que o navegador coloca */
+.indicators ul li::marker,
+.indicators ul li::before {
+    content: none !important;
+    display: none !important;
+}
+.indicators ul li.active {
+    background: #beff1b;
+    width: 35px; /* Vira um "pílula" quando ativo */
+    border-radius: 10px;
+}

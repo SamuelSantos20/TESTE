@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>FP Sellection</title>
+</head>
+<body>
+    <header>
+        <div class="logo">FP SELLECTION</div>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Carro</li>
+                <li>Fale Conosco</li>
+            </ul>
+        </nav>
+    </header>
+
+<section class="container">
+    <div class="arrows">
+        <button id="prev" aria-label="Anterior"></button>
+        <button id="next" aria-label="Próximo"></button>
+    </div>
+
+    <div class="list">
+        
+        <div class="item active">
+            <div class="car-img">
+                <img src="./img/1.png" alt="Carro 1">
+            </div>
+            <div class="content">
+                <p class="car-category">Esportivo</p>
+                <h2>Porsche 911</h2>
+                <p class="description">Descrição do primeiro carro aqui.</p>
+                <button class="btn-more">SAIBA MAIS</button>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="car-img">
+                <img src="./img/2.png" alt="Carro 2">
+            </div>
+            <div class="content">
+                <p class="car-category">Conversível</p>
+                <h2>Ferrari</h2>
+                <p class="description">Descrição do segundo carro aqui.</p>
+                <button class="btn-more">SAIBA MAIS</button>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="car-img">
+                <img src="./img/3.png" alt="Carro 3">
+            </div>
+            <div class="content">
+                <p class="car-category">Supercarro</p>
+                <h2>Lamborghini</h2>
+                <p class="description">Descrição do terceiro carro aqui.</p>
+                <button class="btn-more">SAIBA MAIS</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="indicators">
+        <div class="number">01</div>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</section>
+
+<script src="script.js"></script>
